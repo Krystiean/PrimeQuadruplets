@@ -5,32 +5,29 @@ public class PrimaryNumber()
     {
         List<int> quadrupleNumbers = new List<int>();
 
-    int i = 2;
-    quadrupleNumbers.Add(i);
+        bool[] isPrime = new bool[maxInterval + 1];
 
-
-    for (i = 3; i <= maxInterval; i++)
-    {
-        bool firstNumber = true;
-
-        for (int j = 2; j < i; j++)
+        for (int number = 2; number <= maxInterval; number++)
         {
-            if (i % j == 0)
+            isPrime[number] = true;
+        }
+
+        for (int number = 2; number <= maxInterval; number++)
+        {
+            if (isPrime[number])
             {
-                firstNumber = false;
-                break;
+                for (int numberMultiples = number * number; numberMultiples <= maxInterval; numberMultiples += number)
+                {
+                    isPrime[numberMultiples] = false;
+                }
+
+                quadrupleNumbers.Add(number);
             }
         }
 
-        if (firstNumber)
+        foreach (int element in quadrupleNumbers)
         {
-            quadrupleNumbers.Add(i);
+                Console.WriteLine(element);
         }
-    }
-
-    foreach (int element in quadrupleNumbers)
-    {
-            Console.WriteLine(element);
-    }
     }
 }
